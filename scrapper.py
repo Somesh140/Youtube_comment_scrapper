@@ -9,9 +9,6 @@ from selenium.webdriver.common.by import By
 import csv
 from utils import read_yaml
 
-#driver = webdriver.Chrome(service=ChromeService(
-#    ChromeDriverManager().install()))
-#driver = webdriver.Chrome(ChromeDriverManager().install())
 
 from selenium.webdriver.chrome.service import Service
 
@@ -28,14 +25,13 @@ service = Service(chrome_path)
 # Create the WebDriver instance with the Service and Chrome options
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
-# Number of times to scroll down to load more comments
-#scroll_down_count = 15
+
 CONFIG=read_yaml("config\config.yaml")
 
 # Load the YouTube video page
 driver.get(CONFIG["VIDEO_URL"])  
 
-# Scroll down to load comments (optional)
+
 # Add code here to scroll down the page if the comments are dynamically loaded
 last_height = driver.execute_script("return document.documentElement.scrollHeight")
 
@@ -47,11 +43,6 @@ while True:
         break
     last_height = new_height
 
-# Scroll down to load comments (optional)
-# Add code here to scroll down the page if the comments are dynamically loaded
-#for _ in range(scroll_down_count):
-#    driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.END)
-#    time.sleep(2)
 
 # Get the page source
 page_source = driver.page_source
